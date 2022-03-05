@@ -12,11 +12,3 @@ a{
 h2, h3 {
     text-align: center;
 }
-
-.image {
-        background-image: url(/image/image.jpg);
-        background-repeat: no-repeat;
-        background-position: right;
-        object-fit: scale-down;
-        width: 100%;
-      }
