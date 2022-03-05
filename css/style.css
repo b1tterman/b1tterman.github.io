@@ -18,4 +18,5 @@ h2, h3 {
         background-repeat: no-repeat;
         background-position: right;
         object-fit: scale-down;
+        width: 100%;
       }
