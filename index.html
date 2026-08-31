@@ -8,24 +8,27 @@
     <link rel="icon" type="image/x-icon" href="image/favicon.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <style>
-        /* Общие стили для экрана (минимальные изменения) */
+        /* Стили для экрана (как было) */
         body {
             background: #fff;
         }
         .container {
             max-width: 1100px;
         }
+        .img-fluid {
+            max-width: 180px;
+        }
 
-        /* Стили для печати — всё на одной странице */
+        /* Стили для печати — перестраиваем макет */
         @media print {
             @page {
                 size: A4;
-                margin: 0.6cm 0.8cm;
+                margin: 0.8cm 1cm;
             }
 
             body {
-                font-size: 8.2pt;
-                line-height: 1.2;
+                font-size: 10pt;
+                line-height: 1.3;
                 color: #000;
                 background: #fff;
             }
@@ -36,83 +39,97 @@
                 margin: 0 !important;
             }
 
+            /* Убираем двухколоночность */
             .row {
-                display: flex;
-                flex-wrap: nowrap;
-                margin: 0;
+                display: block !important;
+                margin: 0 !important;
+            }
+            .col-md-4, .col-md-8 {
+                flex: none !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                padding: 0 !important;
             }
 
-            .col-md-4 {
-                flex: 0 0 27%;
-                max-width: 27%;
-                padding-right: 8px;
-                padding-left: 0;
-            }
-
-            .col-md-8 {
-                flex: 0 0 73%;
-                max-width: 73%;
-                padding-left: 8px;
-                padding-right: 0;
-            }
-
-            /* Фото */
+            /* Скрываем фото */
             .img-fluid {
-                max-width: 70px;
-                height: auto;
-                margin-bottom: 4px;
-                border-radius: 50%;
+                display: none !important;
             }
 
-            /* Заголовки */
+            /* Заголовки — по центру */
             h2 {
-                font-size: 15pt;
-                margin-bottom: 1px;
+                font-size: 18pt;
+                text-align: center;
+                margin-bottom: 2px;
                 font-weight: 600;
             }
             h3 {
-                font-size: 11pt;
-                margin-bottom: 2px;
+                font-size: 13pt;
+                text-align: center;
+                margin-bottom: 6px;
                 font-weight: 500;
             }
-            h4 {
-                font-size: 9.5pt;
-                margin-top: 5px;
-                margin-bottom: 2px;
+
+            /* Блок контакты + навыки — горизонтально */
+            .contacts-skills {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin-bottom: 6px;
+                border-bottom: 1px solid #ccc;
+                padding-bottom: 4px;
+            }
+            .contacts-skills > div {
+                flex: 1 1 30%;
+                min-width: 120px;
+            }
+            .contacts-skills h5 {
+                font-size: 10pt;
+                margin-top: 2px;
+                margin-bottom: 1px;
                 font-weight: 600;
             }
-            h5 {
+            .contacts-skills ul {
+                list-style: none;
+                padding-left: 0;
+                margin-bottom: 2px;
+            }
+            .contacts-skills li {
                 font-size: 9pt;
-                margin-top: 4px;
+                line-height: 1.2;
+                margin-bottom: 0;
+            }
+            .contacts-skills .skill-group {
+                margin-bottom: 1px;
+            }
+            .contacts-skills .skill-group b {
+                font-size: 9pt;
+            }
+
+            /* Навыки разбиваем на 4 колонки */
+            .skills-grid {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .skills-grid .skill-group {
+                flex: 0 0 22%;
+                margin-bottom: 2px;
+            }
+
+            /* Остальные разделы */
+            h4 {
+                font-size: 11pt;
+                margin-top: 6px;
                 margin-bottom: 2px;
                 font-weight: 600;
             }
             p {
-                font-size: 8.2pt;
-                margin-bottom: 2px;
+                font-size: 10pt;
+                margin-bottom: 3px;
             }
-
-            /* Списки */
-            ul {
-                margin-bottom: 1px;
-                padding-left: 14px;
-                margin-top: 0;
-            }
-            li {
-                font-size: 8.2pt;
-                margin-bottom: 0;
-                line-height: 1.2;
-            }
-            .list-unstyled {
-                padding-left: 0;
-            }
-            .list-unstyled li {
-                margin-bottom: 0.5px;
-            }
-
-            /* Отступы */
             .mb-4 {
-                margin-bottom: 3px !important;
+                margin-bottom: 4px !important;
             }
             .mt-4 {
                 margin-top: 4px !important;
@@ -125,10 +142,18 @@
                 padding-bottom: 0 !important;
             }
             .text-muted {
-                font-size: 7.5pt;
+                font-size: 8.5pt;
             }
-
-            /* Ссылки */
+            ul {
+                margin-bottom: 1px;
+                padding-left: 18px;
+                margin-top: 0;
+            }
+            li {
+                font-size: 9.5pt;
+                line-height: 1.2;
+                margin-bottom: 0.5px;
+            }
             a {
                 text-decoration: none;
                 color: #000 !important;
@@ -137,29 +162,22 @@
                 color: #000 !important;
             }
 
-            /* Скрыть ненужное */
+            /* Скрыть подвал и ненужное */
             footer {
                 display: none;
             }
 
             /* Запрет разрыва блоков */
-            .mb-4, .mt-4, h4, .row > div {
+            .mb-4, .mt-4, h4, .contacts-skills {
                 page-break-inside: avoid;
             }
 
-            /* Компактный список навыков */
-            .skill-group {
-                margin-bottom: 2px;
+            /* Убираем лишние отступы у списков навыков */
+            .list-unstyled {
+                padding-left: 0;
             }
-            .skill-group b {
-                font-size: 8.5pt;
-            }
-        }
-
-        /* Дополнительно для экрана — небольшие улучшения */
-        @media screen {
-            .img-fluid {
-                max-width: 180px;
+            .list-unstyled li {
+                margin-bottom: 0;
             }
         }
     </style>
@@ -168,55 +186,60 @@
 <body>
 <div class="container py-4">
     <div class="row">
-        <!-- Левая колонка: фото, контакты, навыки -->
+        <!-- Левая колонка (на экране) -->
         <div class="col-md-4 order-2 order-md-1">
             <img src="image/image.jpg"
                  alt="Данияр Бикчентаев"
                  class="img-fluid rounded mb-3 d-block mx-auto">
 
-            <h5>Контакты</h5>
-            <ul class="list-unstyled">
-                <li>Телефон: <a class="text-dark" href="tel:+79270365440">+7 927 036-54-40</a></li>
-                <li>E-mail: <a class="text-dark" href="mailto:b1tterman@ya.ru">b1tterman@ya.ru</a></li>
-                <li>Telegram: <a class="text-dark" href="https://t.me/b1tterman" target="_blank" rel="noopener">@b1tterman</a></li>
-            </ul>
-
-            <h5 class="mt-4">Ключевые навыки</h5>
-
-            <div class="skill-group"><b>Тестирование</b></div>
-            <ul class="list-unstyled">
-                <li>Функциональное, интеграционное, регрессионное, smoke</li>
-                <li>API и UI-тестирование</li>
-                <li>Тест-дизайн, тест-кейсы, чек-листы, баг-репорты</li>
-                <li>Ретест дефектов, проведение демо заказчикам</li>
-            </ul>
-
-            <div class="skill-group"><b>Автоматизация</b></div>
-            <ul class="list-unstyled">
-                <li>Java 17/21</li>
-                <li>REST Assured, Selenide / Selenium</li>
-                <li>Maven, TestNG, Page Object, Allure</li>                
-            </ul>
-
-            <div class="skill-group"><b>Интеграции и данные</b></div>
-            <ul class="list-unstyled">
-                <li>REST API, gRPC</li>
-                <li>Kafka, SQL, PostgreSQL, MySQL</li>
-                <li>Hibernate, Spring, Spring JPA</li>
-                <li>Elasticsearch, WireMock</li>
-            </ul>
-
-            <div class="skill-group"><b>Инфраструктура</b></div>
-            <ul class="list-unstyled">
-                <li>Git, GitLab CI/CD, TeamCity</li>
-                <li>Docker, Kubernetes</li>
-                <li>Grafana, Prometheus</li>
-                <li>Postman, DBeaver, Chrome DevTools</li>
-                <li>IBM MQ, ActiveMQ</li>
-            </ul>
+            <!-- Этот блок будет перестроен для печати -->
+            <div class="contacts-skills">
+                <div>
+                    <h5>Контакты</h5>
+                    <ul class="list-unstyled">
+                        <li>Телефон: <a href="tel:+79270365440">+7 927 036-54-40</a></li>
+                        <li>E-mail: <a href="mailto:b1tterman@ya.ru">b1tterman@ya.ru</a></li>
+                        <li>Telegram: <a href="https://t.me/b1tterman" target="_blank" rel="noopener">@b1tterman</a></li>
+                    </ul>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-group"><b>Тестирование</b>
+                        <ul class="list-unstyled">
+                            <li>Функциональное, интеграционное, регрессионное, smoke</li>
+                            <li>API и UI-тестирование</li>
+                            <li>Тест-дизайн, тест-кейсы, чек-листы, баг-репорты</li>
+                            <li>Ретест дефектов, проведение демо</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group"><b>Автоматизация</b>
+                        <ul class="list-unstyled">
+                            <li>Java 17/21</li>
+                            <li>REST Assured, Selenide / Selenium</li>
+                            <li>Maven, TestNG, Page Object, Allure</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group"><b>Интеграции и данные</b>
+                        <ul class="list-unstyled">
+                            <li>REST API, gRPC</li>
+                            <li>Kafka, SQL, PostgreSQL, MySQL</li>
+                            <li>Hibernate, Spring, Spring JPA</li>
+                            <li>Elasticsearch, WireMock</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group"><b>Инфраструктура</b>
+                        <ul class="list-unstyled">
+                            <li>Git, GitLab CI/CD, TeamCity</li>
+                            <li>Docker, Kubernetes</li>
+                            <li>Grafana, Prometheus</li>
+                            <li>Postman, DBeaver, Chrome DevTools</li>
+                            <li>IBM MQ, ActiveMQ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Правая колонка: основная информация -->
+        <!-- Правая колонка (на экране) -->
         <div class="col-md-8 order-1 order-md-2">
             <h2>Данияр Бикчентаев</h2>
             <h3>Java QA Automation Engineer</h3>
@@ -307,6 +330,7 @@
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
