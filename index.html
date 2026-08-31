@@ -54,6 +54,15 @@
                 display: none !important;
             }
 
+            /* Скрываем левую колонку (там фото и контакты для экрана) */
+            .col-md-4 {
+                display: none !important;
+            }
+            /* Показываем правую колонку на всю ширину */
+            .col-md-8 {
+                display: block !important;
+            }
+
             h2 {
                 font-size: 18pt;
                 text-align: center;
@@ -67,65 +76,66 @@
                 font-weight: 500;
             }
 
-            .contacts-skills {
-                display: flex;
+            /* Блок контакты+навыки — виден только в печатной копии */
+            .print-contacts-skills {
+                display: flex !important;
                 flex-wrap: nowrap;
                 justify-content: space-between;
                 margin-bottom: 6px;
                 border-bottom: 1px solid #ccc;
                 padding-bottom: 4px;
             }
-            .contacts-block {
+            .print-contacts-skills .contacts-block {
                 flex: 0 0 20%;
                 min-width: 100px;
             }
-            .contacts-block h5 {
+            .print-contacts-skills .contacts-block h5 {
                 font-size: 10pt;
                 margin-top: 0;
                 margin-bottom: 2px;
                 font-weight: 600;
             }
-            .contacts-block ul {
+            .print-contacts-skills .contacts-block ul {
                 list-style: none;
                 padding-left: 0;
                 margin: 0;
             }
-            .contacts-block li {
+            .print-contacts-skills .contacts-block li {
                 font-size: 9pt;
                 line-height: 1.2;
                 margin-bottom: 0;
             }
-
-            .skills-grid {
+            .print-contacts-skills .skills-grid {
                 flex: 1;
                 display: flex;
                 flex-wrap: nowrap;
                 justify-content: space-between;
                 padding-left: 8px;
             }
-            .skill-group {
+            .print-contacts-skills .skill-group {
                 flex: 1;
                 margin-right: 4px;
             }
-            .skill-group:last-child {
+            .print-contacts-skills .skill-group:last-child {
                 margin-right: 0;
             }
-            .skill-group b {
+            .print-contacts-skills .skill-group b {
                 font-size: 9.5pt;
                 display: block;
                 margin-bottom: 1px;
             }
-            .skill-group ul {
+            .print-contacts-skills .skill-group ul {
                 list-style: none;
                 padding-left: 0;
                 margin: 0;
             }
-            .skill-group li {
+            .print-contacts-skills .skill-group li {
                 font-size: 8.5pt;
                 line-height: 1.15;
                 margin-bottom: 0;
             }
 
+            /* Остальные разделы */
             h4 {
                 font-size: 11pt;
                 margin-top: 6px;
@@ -175,8 +185,22 @@
                 display: none;
             }
 
-            .mb-4, .mt-4, h4, .contacts-skills {
+            .mb-4, .mt-4, h4, .print-contacts-skills {
                 page-break-inside: avoid;
+            }
+        }
+
+        /* Для экрана скрываем печатный дубликат */
+        .print-contacts-skills {
+            display: none !important;
+        }
+        /* На экране показываем обычный блок */
+        .screen-contacts-skills {
+            display: block;
+        }
+        @media print {
+            .screen-contacts-skills {
+                display: none !important;
             }
         }
     </style>
@@ -185,13 +209,13 @@
 <body>
 <div class="container py-4">
     <div class="row">
-        <!-- Левая колонка (на экране) -->
+        <!-- Левая колонка (только для экрана) -->
         <div class="col-md-4 order-2 order-md-1">
             <img src="image/image.jpg"
                  alt="Данияр Бикчентаев"
                  class="img-fluid rounded mb-3 d-block mx-auto">
 
-            <div class="contacts-skills">
+            <div class="screen-contacts-skills contacts-skills">
                 <div class="contacts-block">
                     <h5>Контакты</h5>
                     <ul>
@@ -242,7 +266,7 @@
             </div>
         </div>
 
-        <!-- Правая колонка (на экране) -->
+        <!-- Правая колонка (основное содержание) -->
         <div class="col-md-8 order-1 order-md-2">
             <h2>Данияр Бикчентаев</h2>
             <h3>Java QA Automation Engineer</h3>
@@ -253,6 +277,57 @@
                 работаю с микросервисами, Kafka, SQL и CI/CD. Оптимизирую тестовые фреймворки и регрессионные
                 прогоны, участвую в подготовке релизов и помогаю развивать команду.
             </p>
+
+            <!-- Дубликат блока контакты+навыки для печати -->
+            <div class="print-contacts-skills">
+                <div class="contacts-block">
+                    <h5>Контакты</h5>
+                    <ul>
+                        <li>Телефон: <a href="tel:+79270365440">+7 927 036-54-40</a></li>
+                        <li>E-mail: <a href="mailto:b1tterman@ya.ru">b1tterman@ya.ru</a></li>
+                        <li>Telegram: <a href="https://t.me/b1tterman" target="_blank" rel="noopener">@b1tterman</a></li>
+                    </ul>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-group">
+                        <b>Тестирование</b>
+                        <ul>
+                            <li>Функциональное, интеграционное, регрессионное, smoke</li>
+                            <li>API и UI-тестирование</li>
+                            <li>Тест-дизайн, тест-кейсы, чек-листы, баг-репорты</li>
+                            <li>Ретест дефектов, проведение демо</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <b>Автоматизация</b>
+                        <ul>
+                            <li>Java 17/21</li>
+                            <li>REST Assured, Selenide / Selenium</li>
+                            <li>TestNG, Page Object, Allure</li>
+                            <li>Maven</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <b>Интеграции и данные</b>
+                        <ul>
+                            <li>REST API</li>
+                            <li>Kafka, SQL, PostgreSQL, MySQL</li>
+                            <li>Hibernate, Spring, Spring JPA</li>
+                            <li>Elasticsearch, WireMock</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <b>Инфраструктура</b>
+                        <ul>
+                            <li>Git, GitLab CI/CD, TeamCity</li>
+                            <li>Docker, Kubernetes</li>
+                            <li>Grafana, Prometheus</li>
+                            <li>Postman, DBeaver, Chrome DevTools</li>
+                            <li>IBM MQ, ActiveMQ</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
             <h4 class="mt-4">Опыт работы</h4>
 
@@ -333,6 +408,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
