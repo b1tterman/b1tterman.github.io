@@ -19,7 +19,7 @@
             max-width: 180px;
         }
 
-        /* Стили для печати */
+        /* Для печати */
         @media print {
             @page {
                 size: A4;
@@ -39,6 +39,7 @@
                 margin: 0 !important;
             }
 
+            /* Убираем двухколоночность */
             .row {
                 display: block !important;
                 margin: 0 !important;
@@ -50,19 +51,20 @@
                 padding: 0 !important;
             }
 
+            /* Скрываем фото и левую колонку (она не нужна в печати) */
             .img-fluid {
                 display: none !important;
             }
-
-            /* Скрываем левую колонку (там фото и контакты для экрана) */
             .col-md-4 {
                 display: none !important;
             }
-            /* Показываем правую колонку на всю ширину */
+
+            /* Показываем правую колонку */
             .col-md-8 {
                 display: block !important;
             }
 
+            /* Заголовки по центру */
             h2 {
                 font-size: 18pt;
                 text-align: center;
@@ -75,13 +77,18 @@
                 margin-bottom: 4px;
                 font-weight: 500;
             }
+            p {
+                font-size: 10pt;
+                margin-bottom: 4px;
+                text-align: justify;
+            }
 
-            /* Блок контакты+навыки — виден только в печатной копии */
+            /* Блок контакты+навыки (для печати) */
             .print-contacts-skills {
                 display: flex !important;
                 flex-wrap: nowrap;
                 justify-content: space-between;
-                margin-bottom: 6px;
+                margin: 4px 0 6px 0;
                 border-bottom: 1px solid #ccc;
                 padding-bottom: 4px;
             }
@@ -91,13 +98,12 @@
             }
             .print-contacts-skills .contacts-block h5 {
                 font-size: 10pt;
-                margin-top: 0;
-                margin-bottom: 2px;
+                margin: 0 0 2px 0;
                 font-weight: 600;
             }
             .print-contacts-skills .contacts-block ul {
                 list-style: none;
-                padding-left: 0;
+                padding: 0;
                 margin: 0;
             }
             .print-contacts-skills .contacts-block li {
@@ -126,7 +132,7 @@
             }
             .print-contacts-skills .skill-group ul {
                 list-style: none;
-                padding-left: 0;
+                padding: 0;
                 margin: 0;
             }
             .print-contacts-skills .skill-group li {
@@ -141,11 +147,6 @@
                 margin-top: 6px;
                 margin-bottom: 2px;
                 font-weight: 600;
-            }
-            p {
-                font-size: 10pt;
-                margin-bottom: 4px;
-                text-align: justify;
             }
             .mb-4 {
                 margin-bottom: 3px !important;
@@ -188,20 +189,16 @@
             .mb-4, .mt-4, h4, .print-contacts-skills {
                 page-break-inside: avoid;
             }
+
+            /* Скрываем экранный блок с контактами (он в левой колонке) */
+            .screen-contacts-skills {
+                display: none !important;
+            }
         }
 
         /* Для экрана скрываем печатный дубликат */
         .print-contacts-skills {
             display: none !important;
-        }
-        /* На экране показываем обычный блок */
-        .screen-contacts-skills {
-            display: block;
-        }
-        @media print {
-            .screen-contacts-skills {
-                display: none !important;
-            }
         }
     </style>
 </head>
@@ -215,7 +212,7 @@
                  alt="Данияр Бикчентаев"
                  class="img-fluid rounded mb-3 d-block mx-auto">
 
-            <div class="screen-contacts-skills contacts-skills">
+            <div class="screen-contacts-skills">
                 <div class="contacts-block">
                     <h5>Контакты</h5>
                     <ul>
@@ -245,8 +242,9 @@
                     </div>
                     <div class="skill-group">
                         <b>Интеграции и данные</b>
-                        <ul>                            
-                            <li>REST API, Kafka, PostgreSQL</li>
+                        <ul>
+                            <li>REST API</li>
+                            <li>Kafka, SQL, PostgreSQL, MySQL</li>
                             <li>Hibernate, Spring, Spring JPA</li>
                             <li>Elasticsearch, WireMock</li>
                         </ul>
@@ -277,7 +275,7 @@
                 прогоны, участвую в подготовке релизов и помогаю развивать команду.
             </p>
 
-            <!-- Дубликат блока контакты+навыки для печати -->
+            <!-- Дубликат контактов и навыков для печати -->
             <div class="print-contacts-skills">
                 <div class="contacts-block">
                     <h5>Контакты</h5>
@@ -408,6 +406,9 @@
     </div>
 </div>
 
+<footer class="text-center text-muted py-3">
+    © b1tterman 2026
+</footer>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
