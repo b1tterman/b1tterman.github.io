@@ -8,7 +8,7 @@
     <link rel="icon" type="image/x-icon" href="image/favicon.ico">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <style>
-        /* Стили для экрана */
+        /* Общие стили для экрана */
         body {
             background: #fff;
         }
@@ -39,7 +39,6 @@
                 margin: 0 !important;
             }
 
-            /* Убираем двухколоночность */
             .row {
                 display: block !important;
                 margin: 0 !important;
@@ -51,15 +50,12 @@
                 padding: 0 !important;
             }
 
-            /* Скрываем фото и левую колонку (она не нужна в печати) */
             .img-fluid {
                 display: none !important;
             }
             .col-md-4 {
                 display: none !important;
             }
-
-            /* Показываем правую колонку */
             .col-md-8 {
                 display: block !important;
             }
@@ -190,15 +186,15 @@
                 page-break-inside: avoid;
             }
 
-            /* Скрываем экранный блок с контактами (он в левой колонке) */
+            /* Скрываем экранный блок (он в левой колонке) */
             .screen-contacts-skills {
                 display: none !important;
             }
         }
 
-        /* Для экрана скрываем печатный дубликат */
+        /* Для экрана — скрываем дубликат контактов, который предназначен для печати */
         .print-contacts-skills {
-            display: none !important;
+            display: none; /* без !important, чтобы в печати перекрыть */
         }
     </style>
 </head>
@@ -275,7 +271,7 @@
                 прогоны, участвую в подготовке релизов и помогаю развивать команду.
             </p>
 
-            <!-- Дубликат контактов и навыков для печати -->
+            <!-- Дубликат контактов и навыков для печати (появляется только при печати) -->
             <div class="print-contacts-skills">
                 <div class="contacts-block">
                     <h5>Контакты</h5>
@@ -406,9 +402,7 @@
     </div>
 </div>
 
-<footer class="text-center text-muted py-3">
-    © b1tterman 2026
-</footer>
+
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
